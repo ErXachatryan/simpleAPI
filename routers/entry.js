@@ -9,21 +9,14 @@ const { JWT_TOKEN_EXP } = process.env;
 const router = new Router();
 
 router.post('/signin', async (req, res) => {
-    const params = {
-        ...req.body
-    };
-    const response = await usersController.post(params);
+    const response = await usersController.post(req.body);
 
     res.send(response);
 });
 
 router.post('/login', async (req, res) => {
     try {
-        const params = {
-            ...req.body
-        };
-
-        const user = await usersController.get(params);
+        const user = await usersController.get(req.body);
 
         if(user) {
             const token = tokenizer.createToken({

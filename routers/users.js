@@ -5,7 +5,7 @@ const router = new Router();
 
 router.get('/', async (req, res, next) => {
     try {
-        const user = await usersController.get({ ...req.user });
+        const user = await usersController.get(req.user);
 
         res.send({
             email: user.email,
@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
 
 router.delete('/', async (req, res, next) => {
     try {
-        res.send(await usersController.delete({ ...req.user }));
+        res.send(await usersController.delete(req.user));
     } catch(err) {
         next(err);
     }
@@ -30,12 +30,10 @@ router.delete('/', async (req, res, next) => {
 router.put('/', async(req, res, next) => {
     try {
         const data = await usersController.put({
-            user: {
-                ...req.user,
-            },
-            body: {
-                ...req.body,
-            },
+            nickname: req.user.nickname,
+            newEmail: req.body.email,
+            newNickname: req.body.nickname,
+            newPassword: req.body.password,
         });
         
         res.send(data);

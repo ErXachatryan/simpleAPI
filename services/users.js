@@ -53,10 +53,10 @@ export default class Users {
         const db = await this.#pool.connect();
         const res = await db.query(`
             UPDATE "User"
-                SET email = '${ params.body.email }'
-                    , nickname = '${ params.body.nickname }'
-                    , password = '${ params.body.password }'
-                WHERE nickname = '${ params.user.nickname }'
+                SET email = '${ params.newEmail }'
+                    , nickname = '${ params.newNickname }'
+                    , password = '${ params.newPassword }'
+                WHERE nickname = '${ params.nickname }'
             RETURNING *;
         `);
 

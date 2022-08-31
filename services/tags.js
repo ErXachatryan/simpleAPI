@@ -72,10 +72,10 @@ export default class Tags {
         const db = await this.#pool.connect();
         const res = await db.query(`
             UPDATE "Tag"
-                SET name = '${ params.tag.name }'
-                , sortOrder = '${ params.tag.sortOrder ?? 0 }'
-            WHERE id = '${ params.tag.id }'
-                AND creator = '${ params.user.uid }'
+                SET name = '${ params.newTagName }'
+                , sortOrder = '${ params.newTagOrder ?? 0 }'
+            WHERE id = '${ params.tagId }'
+                AND creator = '${ params.uid }'
             RETURNING *;
         `);
 

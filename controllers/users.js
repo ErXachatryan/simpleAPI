@@ -9,7 +9,7 @@ const { JWT_TOKEN_EXP } = process.env;
 
 export default class Users {
     async get(params) {
-        const user = await usersService.get({ ...params });
+        const user = await usersService.get(params);
 
         if(!user.length) {
             const err = new Error('No such user found');
@@ -29,7 +29,7 @@ export default class Users {
     };
 
     async post(params) {
-        const user = await usersService.post({ ...params });
+        const user = await usersService.post(params);
 
         const token = tokenizer.createToken({
             nickname: params.nickname,
@@ -44,7 +44,7 @@ export default class Users {
     };
 
     async delete(params) {
-        const response = await usersService.delete({ ...params });
+        const response = await usersService.delete(params);
 
         if(!response.length) {
             const err = new Error('No such user found');
@@ -59,7 +59,7 @@ export default class Users {
     };
 
     async put(params) {
-        const response = await usersService.put({ ...params });
+        const response = await usersService.put(params);
 
         if(!response.length) {
             const err = new Error('No such user found');

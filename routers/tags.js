@@ -5,10 +5,7 @@ const router = new Router();
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const data = await tagsController.get({
-            tag: { ...req.params },
-            user: { ...req.user },
-        });
+        const data = await tagsController.get(req.params);
 
         res.send(data);
     } catch(err) {
@@ -19,8 +16,8 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try {
         const data = await tagsController.post({
-            tag: { ...req.body },
-            user: { ...req.user },
+            tag: req.body,
+            user: req.user,
         });
 
         res.send(data);
@@ -32,8 +29,8 @@ router.post('/', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
     try {
         const data = await tagsController.delete({
-            tag: { ...req.params },
-            user: { ...req.user },
+            tag: req.body,
+            user: req.user,
         });
 
         res.send(data);
@@ -45,8 +42,11 @@ router.delete('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
     try {
         const data = await tagsController.put({
-            tag: { ...req.params, ...req.query },
-            user: { ...req.user },
+            tagId: req.params.id,
+            newTagName: req.query.name,
+            newTagOrder: req.body.sortOrder,
+            uid: req.user.uid,
+            nickname: req.user.nickname
         });
 
         res.send(data);
