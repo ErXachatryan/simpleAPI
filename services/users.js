@@ -27,7 +27,8 @@ export default class Users {
                 VALUES('${ params.email }'
                     , '${ params.password }'
                     , '${ params.nickname }'
-                ) RETURNING uid;
+                )
+            RETURNING uid;
         `);
 
         await db.release();

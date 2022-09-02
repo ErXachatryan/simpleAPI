@@ -39,7 +39,7 @@ export default class Users {
 
         return {
             token,
-            expire: + JWT_TOKEN_EXP,
+            expire: JWT_TOKEN_EXP,
         };
     };
 

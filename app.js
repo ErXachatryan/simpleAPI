@@ -24,6 +24,11 @@ app.use('/', entryRouter);
 app.use('/tag', tokenizer.verifyToken, tagsRouter);
 app.use('/user', tokenizer.verifyToken, usersRouter);
 app.use((err, req, res, next) => {
+    if(err.code === '23505') {
+        err.statusCode = 409;
+        err.message = `Constraint: '${ err.constraint }' failed. Value already exists.`;
+    }
+
     res.status(err.statusCode || 500).json({
         message: err.message || 'Internal server error',
     });
